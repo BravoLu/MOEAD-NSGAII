@@ -1,8 +1,7 @@
-function Offspring = NSGA_Gen(MatingPool,Boundary,Coding,MaxOffspring)
+function Offspring = NSGA_Gen(MatingPool,Boundary,MaxOffspring)
 % 交叉,变异并生成新的种群
 % 输入: MatingPool,   交配池, 其中每第i个和第i+1个个体交叉产生两个子代, i为奇数
 %       Boundary,     决策空间, 其第一行为空间中每维的上界, 第二行为下界
-%       Coding,       编码方式, 不同的编码方式采用不同的交叉变异方法
 %       MaxOffspring, 返回的子代数目, 若缺省则返回所有产生的子代, 即和交配池的大小相同
 % 输出: Offspring, 产生的子代新种群
 

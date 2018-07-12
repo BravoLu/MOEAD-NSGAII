@@ -1,4 +1,7 @@
-function [Output,Boundary,Coding] = Objective(Operation,Problem,M,Input)
+%目标函数定义
+
+
+function [Output,Boundary] = Objective(Operation,Problem,M,Input)
     persistent K;
     Boundary = NaN; Coding = NaN;
     switch Operation
@@ -15,7 +18,7 @@ function [Output,Boundary,Coding] = Objective(Operation,Problem,M,Input)
             
             Output   = Population;
             Boundary = [MaxValue;MinValue];
-            Coding   = 'Real';
+
         case 'value'
             Population    = Input;
             FunctionValue = zeros(size(Population,1),M);
@@ -55,20 +58,5 @@ function [Output,Boundary,Coding] = Objective(Operation,Problem,M,Input)
                     end
             end
             Output = FunctionValue;
-        case 'true'
-            switch Problem
-                case 'DTLZ1'
-                    Population = T_uniform(Input,M);
-                    Population = Population/2;
-                case {'DTLZ2','DTLZ3','DTLZ4'}
-                Population = T_uniform(Input,M);
-                    for i = 1 : size(Population,1)
-                        k    = find(Population(i,:)~=0,1);
-                        Temp = Population(i,[1:k-1,k+1:end])./Population(i,k);
-                        Population(i,k) = sqrt(1/(sum(Temp.^2)+1));
-                        Population(i,[1:k-1,k+1:end]) = Temp*Population(i,k);
-                    end
-            end
-            Output = Population;
     end
 end

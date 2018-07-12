@@ -14,7 +14,7 @@ end
 
 %算法开始
     %初始化种群
-    [Population,Boundary,Coding] = Objective('init',Problem,M,N);
+    [Population,Boundary] = Objective('init',Problem,M,N);
     FunctionValue = Objective('value',Problem,M,Population);
 
     FrontValue = NonDominateSort(FunctionValue);
@@ -24,7 +24,8 @@ end
     for Gene = 1 : Generations    
         %产生子代
         MatingPool = Mating(Population,FrontValue,CrowdDistance);
-        Offspring = NSGA_Gen(MatingPool,Boundary,Coding,N);
+        Offspring = NSGA_Gen(MatingPool,Boundary,N);
+
         Population = [Population;Offspring];
         FunctionValue = Objective('value',Problem,M,Population);
         [FrontValue,MaxFront] = NonDominateSort(FunctionValue,'half');

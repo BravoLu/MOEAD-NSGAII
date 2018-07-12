@@ -1,4 +1,4 @@
-function CrowdDistance = CrowdDistance(FunctionValue,FrontValue)
+function CrowdDistance = CrowdDistances(FunctionValue,FrontValue)
 %分前沿面计算种群中每个个体的拥挤距离
 
     [N,M] = size(FunctionValue);
