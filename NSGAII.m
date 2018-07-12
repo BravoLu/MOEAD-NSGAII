@@ -17,17 +17,17 @@ end
     [Population,Boundary,Coding] = Objective('init',Problem,M,N);
     FunctionValue = Objective('value',Problem,M,Population);
 
-    FrontValue = P_sort(FunctionValue);
+    FrontValue = NonDominateSort(FunctionValue);
     CrowdDistance = CrowdDistances(FunctionValue,FrontValue);
     
     %开始迭代
     for Gene = 1 : Generations    
         %产生子代
-        MatingPool = F_mating(Population,FrontValue,CrowdDistance);
+        MatingPool = Mating(Population,FrontValue,CrowdDistance);
         Offspring = NSGA_Gen(MatingPool,Boundary,Coding,N);
         Population = [Population;Offspring];
         FunctionValue = Objective('value',Problem,M,Population);
-        [FrontValue,MaxFront] = P_sort(FunctionValue,'half');
+        [FrontValue,MaxFront] = NonDominateSort(FunctionValue,'half');
         CrowdDistance = CrowdDistances(FunctionValue,FrontValue);
 
         

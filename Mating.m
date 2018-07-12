@@ -1,4 +1,4 @@
-function MatingPool = F_mating(Population,FrontValue,CrowdDistance)
+function MatingPool = Mating(Population,FrontValue,CrowdDistance)
 %Ωª≈‰≥ÿ—°‘Ò
 
     [N,D] = size(Population);

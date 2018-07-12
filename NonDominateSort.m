@@ -1,4 +1,4 @@
-function [FrontValue,MaxFront] = P_sort(FunctionValue,Operation)
+function [FrontValue,MaxFront] = NonDominateSort(FunctionValue,Operation)
 % 进行非支配排序
 % 输入: FunctionValue, 待排序的种群(目标空间)
 %       Operation,     可指定仅排序第一个面,排序前一半个体,或是排序所有的个体, 默认为排序所有的个体
