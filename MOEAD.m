@@ -34,8 +34,8 @@ end
     B = B(:,1:T);
     
     %初始化种群
-    [Population,Boundary] = P_objective('init',Problem,M,N);
-    FunctionValue = P_objective('value',Problem,M,Population);
+    [Population,Boundary] = Objective('init',Problem,M,N);
+    FunctionValue = Objective('value',Problem,M,Population);
     Z = min(FunctionValue);
 
     %开始迭代
@@ -52,7 +52,7 @@ end
             
             %产生子代
             Offspring = F_generator(Population(i,:),Population(P(k(1)),:),Population(P(k(2)),:),Boundary);
-            OffFunValue = P_objective('value',Problem,M,Offspring);
+            OffFunValue = Objective('value',Problem,M,Offspring);
 
             %更新最优理想点
             Z = min(Z,OffFunValue);
