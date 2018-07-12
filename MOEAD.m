@@ -51,7 +51,7 @@ end
             k = randperm(length(P));
             
             %产生子代
-            Offspring = F_generator(Population(i,:),Population(P(k(1)),:),Population(P(k(2)),:),Boundary);
+            Offspring = Gen(Population(i,:),Population(P(k(1)),:),Population(P(k(2)),:),Boundary);
             OffFunValue = Objective('value',Problem,M,Offspring);
 
             %更新最优理想点
@@ -75,7 +75,7 @@ end
 
         end
         cla;
-        P_draw(FunctionValue);
+        DrawGraph(FunctionValue);
         hold on;
         switch Problem
             case 'DTLZ1'
@@ -103,5 +103,4 @@ end
         pause(0.01);
         %clc;
     end
-    %P_output(Population,toc,'MOEAD-DE',Problem,M,Run);
 end

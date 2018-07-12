@@ -1,6 +1,5 @@
-function Offspring = F_generator(r1,r2,r3,Boundary)
-%微分进化,变异产生一个子代
-    
+function Offspring = Gen(r1,r2,r3,Boundary)
+
     D = length(r1);
     MaxValue = Boundary(1,:);
     MinValue = Boundary(2,:);
@@ -11,7 +10,6 @@ function Offspring = F_generator(r1,r2,r3,Boundary)
     ProM = 1/D;     %变异概率
     DisM = 20;     	%变异参数
     
-    %微分进化
     Offspring = r1;
     Temp = rand(1,D)<=CR;
     Offspring(Temp) = Offspring(Temp)+F.*(r2(Temp)-r3(Temp));

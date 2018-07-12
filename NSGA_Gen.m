@@ -1,4 +1,4 @@
-function Offspring = P_generator(MatingPool,Boundary,Coding,MaxOffspring)
+function Offspring = NSGA_Gen(MatingPool,Boundary,Coding,MaxOffspring)
 % 交叉,变异并生成新的种群
 % 输入: MatingPool,   交配池, 其中每第i个和第i+1个个体交叉产生两个子代, i为奇数
 %       Boundary,     决策空间, 其第一行为空间中每维的上界, 第二行为下界
@@ -11,9 +11,6 @@ function Offspring = P_generator(MatingPool,Boundary,Coding,MaxOffspring)
         MaxOffspring = N;
     end
     
-    switch Coding
-        %实值交叉、变异
-        case 'Real'
             %遗传操作参数
             ProC = 1;       %交叉概率
             ProM = 1/D;     %变异概率
@@ -52,50 +49,4 @@ function Offspring = P_generator(MatingPool,Boundary,Coding,MaxOffspring)
             %越界处理
             Offspring(Offspring>MaxValue) = MaxValue(Offspring>MaxValue);
             Offspring(Offspring<MinValue) = MinValue(Offspring<MinValue);
-            
-        %二进制交叉、变异
-        case 'Binary'
-            %遗传操作参数
-            ProM = 0.01;	%变异概率
-
-            %均匀交叉
-            Offspring = zeros(N,D);
-            for i = 1 : 2 : N
-                k = logical(randi([0,1],1,D));
-                Offspring(i,:)   = MatingPool(i,:);   
-                Offspring(i+1,:) = MatingPool(i+1,:);
-                Offspring(i,k)   = MatingPool(i+1,k);
-                Offspring(i+1,k) = MatingPool(i,k);
-            end
-            Offspring = Offspring(1:MaxOffspring,:);
-
-            %标准变异
-            k    = rand(MaxOffspring,D);
-            Temp = k<=ProM;
-            Offspring(Temp) = 1-Offspring(Temp);
-            
-        %用于0-1背包问题的二进制交叉、变异
-        case 'Binary-MOKP'
-            %遗传操作参数
-            ProM = 0.01;	%变异概率
-
-            %均匀交叉
-            Offspring = zeros(N,D);
-            for i = 1 : 2 : N
-                k = logical(randi([0,1],1,D));
-                Offspring(i,:)   = MatingPool(i,:);   
-                Offspring(i+1,:) = MatingPool(i+1,:);
-                Offspring(i,k)   = MatingPool(i+1,k);
-                Offspring(i+1,k) = MatingPool(i,k);
-            end
-            Offspring = Offspring(1:MaxOffspring,:);
-
-            %标准变异
-            k    = rand(MaxOffspring,D);
-            Temp = k<=ProM;
-            Offspring(Temp) = 1-Offspring(Temp);
-
-            %修复
-            Offspring = P_objective('repair','MOKP',NaN,Offspring);
-    end
 end

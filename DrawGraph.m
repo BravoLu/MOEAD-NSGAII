@@ -1,4 +1,4 @@
-function Handle = P_draw(FigureData,FigureFormat)
+function Handle = DrawGraph(FigureData,FigureFormat)
 % 绘制出指定数据的图形
 % 输入: FigureData,   待绘制的数据矩阵(即点的坐标集合)
 %       FigureFormat, 图形的格式, 可省略
