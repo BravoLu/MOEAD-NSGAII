@@ -3,9 +3,10 @@
 
 function [Output,Boundary] = Objective(Operation,Problem,M,Input)
     persistent K;
-    Boundary = NaN; Coding = NaN;
+    Boundary = NaN;
     switch Operation
-        case 'init'
+        %初始化
+        case 0
             k = find(~isstrprop(Problem,'digit'),1,'last');
             K = [5 10 10 10];
             K = K(str2double(Problem(k+1:end)));
@@ -18,8 +19,8 @@ function [Output,Boundary] = Objective(Operation,Problem,M,Input)
             
             Output   = Population;
             Boundary = [MaxValue;MinValue];
-
-        case 'value'
+        %求函数值
+        case 1
             Population    = Input;
             FunctionValue = zeros(size(Population,1),M);
             switch Problem

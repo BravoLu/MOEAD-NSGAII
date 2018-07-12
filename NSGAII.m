@@ -2,7 +2,7 @@
 function NSGAII(Problem,M)
 clc;format compact;tic;
 
-%-----------------------------------------------------------------------------------------
+
 %参数设定
 Generations = 700;
 if M == 2
@@ -10,14 +10,12 @@ if M == 2
 else M == 3
     N = 105;
 end
-%-----------------------------------------------------------------------------------------
 
-%算法开始
     %初始化种群
-    [Population,Boundary] = Objective('init',Problem,M,N);
-    FunctionValue = Objective('value',Problem,M,Population);
+    [Population,Boundary] = Objective(0,Problem,M,N);
+    FunctionValue = Objective(1,Problem,M,Population);
 
-    FrontValue = NonDominateSort(FunctionValue);
+    FrontValue = NonDominateSort(FunctionValue,0);
     CrowdDistance = CrowdDistances(FunctionValue,FrontValue);
     
     %开始迭代
@@ -27,8 +25,8 @@ end
         Offspring = NSGA_Gen(MatingPool,Boundary,N);
 
         Population = [Population;Offspring];
-        FunctionValue = Objective('value',Problem,M,Population);
-        [FrontValue,MaxFront] = NonDominateSort(FunctionValue,'half');
+        FunctionValue = Objective(1,Problem,M,Population);
+        [FrontValue,MaxFront] = NonDominateSort(FunctionValue,1);
         CrowdDistance = CrowdDistances(FunctionValue,FrontValue);
 
         
@@ -47,7 +45,7 @@ end
         FrontValue = FrontValue(Next);
         CrowdDistance = CrowdDistance(Next);
         
-		FunctionValue = Objective('value',Problem,M,Population);
+		FunctionValue = Objective(1,Problem,M,Population);
 		cla;
 		for i = 1 : MaxFront
 			FrontCurrent = find(FrontValue==i);

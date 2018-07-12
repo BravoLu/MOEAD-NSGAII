@@ -1,5 +1,4 @@
 function Offspring = Gen(r1,r2,r3,Boundary)
-
     D = length(r1);
     MaxValue = Boundary(1,:);
     MinValue = Boundary(2,:);

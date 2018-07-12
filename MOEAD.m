@@ -1,7 +1,7 @@
 function MOEAD(Problem,M)
 clc;format compact;tic;
 
-%-----------------------------------------------------------------------------------------
+
 %参数设定
 Generations = 700;
 delta = 0.9;
@@ -13,8 +13,7 @@ else M == 3
     N = 105;
     H = 13;
 end
-%-----------------------------------------------------------------------------------------
-%算法开始
+
     %初始化向量
     Evaluations = Generations*N;
     [N,W] = EqualWeight(H,M);
@@ -34,8 +33,8 @@ end
     B = B(:,1:T);
     
     %初始化种群
-    [Population,Boundary] = Objective('init',Problem,M,N);
-    FunctionValue = Objective('value',Problem,M,Population);
+    [Population,Boundary] = Objective(0,Problem,M,N);
+    FunctionValue = Objective(1,Problem,M,Population);
     Z = min(FunctionValue);
 
     %开始迭代
@@ -52,7 +51,7 @@ end
             
             %产生子代
             Offspring = Gen(Population(i,:),Population(P(k(1)),:),Population(P(k(2)),:),Boundary);
-            OffFunValue = Objective('value',Problem,M,Offspring);
+            OffFunValue = Objective(1,Problem,M,Offspring);
 
             %更新最优理想点
             Z = min(Z,OffFunValue);

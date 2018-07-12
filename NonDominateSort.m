@@ -5,12 +5,8 @@ function [FrontValue,MaxFront] = NonDominateSort(FunctionValue,Operation)
 % 输出: FrontValue, 排序后的每个个体所在的前沿面编号, 未排序的个体前沿面编号为inf
 %       MaxFront,   排序的最大前面编号
 
-    if nargin < 2
-        Kind = 1;
-    elseif strcmp(Operation,'half')
-        Kind = 2;
-    elseif strcmp(Operation,'first')
-        Kind = 3;
+    if Operation == 1
+        Kind = 2; 
     else
         Kind = 1;
     end
